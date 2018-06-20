@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+		<p>
+		<h6>Select Month and Graph Options</h6>
+		</p>
+		<p>
+		<form action="" method="post">
+		<div class="radio-inline">
+			<label><input type="radio" name="options" value="max">Maximum Temperature</label>
+		</div>
+		<div class="radio-inline">
+			<label><input type="radio" name="options" value="min">Minimum Temperature</label>
+		</div>
+		<div class="radio-inline">
+			<label><input type="radio" name="options" value="ave">Average Temperature</label>
+		</div>
+		<div class="radio-inline">
+			<label><input type="radio" name="options" value="rain">Rainfall</label>
+		</div>
+		<input id="month" type="month" name="date">
+		<input type="submit" name="submit" />
+		</form>
+		</p>
+{% endblock %}

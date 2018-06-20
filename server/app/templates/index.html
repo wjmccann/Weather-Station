@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+		<p>
+			<b>Current Time: </b>{{ myData.date }}
+		<div class="row">
+
+			<div class="card bg-light" style="width: 250px">
+				<div class="card-body">
+					<h1 class="card-title">{{ myData.temp }}C</h1>
+					<h6 class="card-subtitle mb2 text-muted">Current Temperature</h6>
+				</div>
+			</div>
+
+			<div class="card bg-light" style="width: 250px">
+				<div class="card-body">
+					<h1 class="card-title">{{ range.maxtemp }}C</h1>
+					<h6 class="card-subtitle mb2 text-muted">Maximum Temperature</h6>
+					<p class="card-text">at {{ range.maxtime }}</p>
+				</div>
+			</div>
+			
+			<div class="card bg-light" style="width: 250px">
+				<div class="card-body">
+					<h1 class="card-title">{{ range.mintemp }}C</h1>
+					<h6 class="card-subtitle mb2 text-muted">Minimum Temperature</h6>
+					<p class="card-text">at {{ range.mintime }}</p>
+				</div>
+			</div>
+
+			<div class="card bg-light" style="width: 250px">
+				<div class="card-body">
+					<h1 class="card-title">{{ range.avetemp }}C</h1>
+					<h6 class="card-subtitle mb2 text-muted">Average Temperature</h6>
+				</div>
+			</div>
+
+			<div class="card bg-light" style="width: 250px">
+				<div class="card-body">
+					<h1 class="card-title">{{ myData.windspeed }}km/h</h1>
+					<h6 class="card-subtitle mb2 text-muted">Current Wind Speed</h6>
+				</div>
+			</div>
+			
+			<div class="card bg-light" style="width: 250px">
+				<div class="card-body">
+					<h1 class="card-title">{{ myData.winddir }}</h1>
+					<h6 class="card-subtitle mb2 text-muted">Current Wind Direction</h6>
+				</div>
+			</div>
+
+			<div class="card bg-light" style="width: 250px">
+				<div class="card-body">
+					<h1 class="card-title">{{ myData.humidity }}%</h1>
+					<h6 class="card-subtitle mb2 text-muted">Current Humidity</h6>
+				</div>
+			</div>
+			
+			<div class="card bg-light" style="width: 250px">
+				<div class="card-body">
+					<h1 class="card-title">{{ myData.rain }}mm</h1>
+					<h6 class="card-subtitle mb2 text-muted">Current Rain</h6>
+				</div>
+			</div>	
+		</div>
+		<p>
+		<h6>View Past Weather</h6>
+		</p>
+		<p>
+		<form action="" method="post">
+		<input id="date" type="date" name="date">
+		<input type="submit" name="submit" />
+		</form>
+		</p>
+{% endblock %}

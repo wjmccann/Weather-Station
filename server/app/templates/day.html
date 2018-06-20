@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+		<p>
+		</p>
+		<div class="row">
+
+			<div class="card bg-light" style="width: 250px">
+				<div class="card-body">
+					<h1 class="card-title">{{ data.maxtemp }}C</h1>
+					<h6 class="card-subtitle mb2 text-muted">Maximum Temperature</h6>
+				</div>
+			</div>
+			
+			<div class="card bg-light" style="width: 250px">
+				<div class="card-body">
+					<h1 class="card-title">{{ data.mintemp }}C</h1>
+					<h6 class="card-subtitle mb2 text-muted">Minimum Temperature</h6>
+				</div>
+			</div>
+
+			<div class="card bg-light" style="width: 250px">
+				<div class="card-body">
+					<h1 class="card-title">{{ data.avetemp }}C</h1>
+					<h6 class="card-subtitle mb2 text-muted">Average Temperature</h6>
+				</div>
+			</div>
+
+			<div class="card bg-light" style="width: 250px">
+				<div class="card-body">
+					<h1 class="card-title">{{ data.rain }}mm</h1>
+					<h6 class="card-subtitle mb2 text-muted">Rainfall</h6>
+				</div>
+			</div>	
+		</div>
+	
+{% endblock %}
