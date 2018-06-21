@@ -132,4 +132,36 @@ def graph():
             myTitle = "Rainfall for " + str(request.form['date'][5:7]) + "/" + str(request.form['date'][:4])
             return render_template('rainfall.html', title=myTitle, data=myDays)
     return render_template('graph.html')
+@app.route('/daily')
+def daily():
+    myDays = []
+    newDay = {
+            'year': '',
+            'month': '',
+            'day': '',
+            'hour': '',
+            'minute': '',
+            'temp': ''
+            }
 
+    index =0
+    for t in temptime:
+        newDay['year'] = str(t[:4])
+        newDay['month'] = str(t[5:7])
+        newDay['day'] = str(t[8:10])
+        newDay['hour'] = str(t[11:13])
+        newDay['minute'] = str(t[14:16])
+        newDay['temp'] = temps[index]
+        index += 1
+        myDays.append(newDay)
+        newDay = {
+                'year': '',
+                'month': '',
+                'day': '',
+                'hour': '',
+                'minute': '',
+                'temp': ''
+                }
+
+    title = "Temperatures for " + str(temptime[0][8:10]) + "/" + str(temptime[0][5:7]) + "/" + str(temptime[0][:4])
+    return render_template('daily.html', title=title, data=myDays)
