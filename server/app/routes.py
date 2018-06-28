@@ -2,7 +2,8 @@ from app import app
 from flask import render_template, redirect, url_for
 from flask import request
 from app import db
-from app.models import Day
+from app.models import Day, Temperature, Rain
+from sqlalchemy import func
 
 currentData = {
         'date': '',
@@ -47,14 +48,27 @@ def parse_data(data):
     currentData['date'] = str(data['time'])
     try:
         currentData['temp'] = round((float(data['temperature_F'])-32)*(0.55), 2)
-        temps.append(currentData['temp'])
-        temptime.append(currentData['date'])
+        t = Temperature(date = currentData['date'], temp = currentData['temp'])
+        db.session.add(t)
+        db.session.commit()
+
+        myTemps = Temperature.query.all()
+        for x in myTemps:
+            temps.append(x.temp)
+            temptime.append(x.date)
+
         temprange['maxtemp'] = max(temps)
         temprange['maxtime'] = temptime[temps.index(max(temps))]
         temprange['mintemp'] = min(temps)
         temprange['mintime'] = temptime[temps.index(min(temps))]
         temprange['avetemp'] = round(sum(temps) / float(len(temps)), 2)
-        #print(currentTemp)
+        
+        checkDate = Temperature.query.get(0)
+        if str(checkDate.date)[:10] != latestDate[:10]:
+            Temperature.query.delete()
+            Rain.query.delete()
+            db.session.commit()
+
     except Exception:
         pass
     try:
@@ -73,7 +87,12 @@ def parse_data(data):
     except Exception:
         pass
     try:
-        rain.append(float(data['raincounter_raw']))
+        r = Rain(rain=float(data['raincounter_raw']))
+        session.db.add(r)
+        session.db.commit()
+        myRain = Rain.query.all()
+        for x in myRain:
+            rain.append(x.rain)
         currentData['rain'] = (max(rain) - min(rain)) * 0.25
 
         #print(currentRain)
