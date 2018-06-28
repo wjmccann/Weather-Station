@@ -63,6 +63,9 @@ def parse_data(data):
         temprange['mintime'] = temptime[temps.index(min(temps))]
         temprange['avetemp'] = round(sum(temps) / float(len(temps)), 2)
         
+        del temps[:]
+        del temptime[:]
+        
         checkDate = Temperature.query.get(0)
         if str(checkDate.date)[:10] != latestDate[:10]:
             Temperature.query.delete()
@@ -94,6 +97,7 @@ def parse_data(data):
         for x in myRain:
             rain.append(x.rain)
         currentData['rain'] = (max(rain) - min(rain)) * 0.25
+        del rain[:]
 
         #print(currentRain)
     except Exception:
@@ -162,6 +166,11 @@ def daily():
             'minute': '',
             'temp': ''
             }
+
+    myTemps = Temperature.query.all()
+    for x in myTemps:
+        temps.append(x.temp)
+        temptime.append(x.date)
 
     index =0
     for t in temptime:
