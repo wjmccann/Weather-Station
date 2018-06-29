@@ -95,8 +95,8 @@ def parse_data(data):
         pass
     try:
         r = Rain(rain=float(data['raincounter_raw']))
-        session.db.add(r)
-        session.db.commit()
+        db.session.add(r)
+        db.session.commit()
         myRain = Rain.query.all()
         for x in myRain:
             rain.append(x.rain)
