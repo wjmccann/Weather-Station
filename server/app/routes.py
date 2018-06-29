@@ -47,6 +47,15 @@ def parse_data(data):
         print("New Day!")
     currentData['date'] = str(data['time'])
     try:
+        try:
+            checkDate = Temperature.query.all()
+            if checkDate[0].date[:10] != latestDate[:10]:
+                Temperature.query.delete()
+                Rain.query.delete()
+                db.session.commit()
+        except Exception:
+            pass
+
         currentData['temp'] = round((float(data['temperature_F'])-32)*(0.55), 2)
         t = Temperature(date = currentData['date'], temp = currentData['temp'])
         db.session.add(t)
@@ -66,12 +75,7 @@ def parse_data(data):
         del temps[:]
         del temptime[:]
         
-        checkDate = Temperature.query.get(0)
-        if str(checkDate.date)[:10] != latestDate[:10]:
-            Temperature.query.delete()
-            Rain.query.delete()
-            db.session.commit()
-
+        
     except Exception:
         pass
     try:
